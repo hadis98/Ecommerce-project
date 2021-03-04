@@ -2,16 +2,16 @@ import  Homepage from "./pages/homepage/homepage.component";
 import { Route , Switch,Link } from "react-router-dom";
 import './App.css';
 import { render } from "react-dom";
+import ShopPage from './pages/shop/shop.components';
+// const Hatspage = (props)=>{
+//   console.log(props);
+//   return(
+// <div>
+//   <h1>HATS PAGE</h1>
+// </div>
 
-const Hatspage = (props)=>{
-  console.log(props);
-  return(
-<div>
-  <h1>HATS PAGE</h1>
-</div>
-
-  );
-};
+//   );
+// };
 
 // const Home = (props)=>{
 //   console.log(props);
@@ -65,7 +65,7 @@ function App() {
     <div>
       <Switch>
         <Route exact path='/' component={Homepage}/>
-        <Route exact path='/hats' component={Hatspage}/>
+        <Route exact path='/shop' component={ShopPage}/>
       </Switch>
     </div>
   )
