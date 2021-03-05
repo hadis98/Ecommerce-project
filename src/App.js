@@ -4,6 +4,9 @@ import './App.css';
 import { render } from "react-dom";
 import ShopPage from './pages/shop/shop.components';
 import Header from "./components/header/header";
+import SignInAndSignUpPage from "./pages/sign-in-and-sign-out/sign-in-and-sign-up";
+import {auth  } from "./firebase/firebase.utils";
+import React from "react";
 // const Hatspage = (props)=>{
 //   console.log(props);
 //   return(
@@ -61,16 +64,37 @@ import Header from "./components/header/header";
 //   );
 // }
 
-function App() {
+class App extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state ={
+      currentUser:null
+    }
+  }
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount(){
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user =>{this.setState({currentUser:user})
+    console.log(user);
+  });
+  }
+
+  componentWillUnmount(){
+    this.unsubscribeFromAuth();
+  }
+  render(){
   return(
     <div>
-      <Header/>
+      <Header currentUser={this.state.currentUser} />
       <Switch>
         <Route exact path='/' component={Homepage}/>
         <Route exact path='/shop' component={ShopPage}/>
+        <Route path='/signin' component={SignInAndSignUpPage}/>
       </Switch>
     </div>
   )
 }
-
+}
 export default App;
